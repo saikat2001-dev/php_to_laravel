@@ -1,0 +1,5 @@
+body { font-family: sans-serif; padding: 20px; }
+    form { margin-bottom: 30px; background: #f4f4f4; padding: 20px; border-radius: 8px; }
+    input, select, button { padding: 8px; margin-right: 10px; }
+    table { border-collapse: collapse; }
+    th { background-color: #eee; }
