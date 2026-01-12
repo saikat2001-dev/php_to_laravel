@@ -79,7 +79,7 @@ $products = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
               <td>$<?= number_format($p['price'], 2); ?></td>
               <td class="action-cell">
                 <div class="hover-actions">
-                  <a href="editProduct.php?id=<?= $p['id']; ?>" class="btn-edit">Edit</a>
+                  <a href="../product/updateProduct.php?id=<?= $p['id']; ?>" class="btn-edit">Edit</a>
                   <a href="../product/deleteProduct.php?id=<?= $p['id']; ?>" class="btn-delete"
                     onclick="return confirm('Delete this product?')">Delete</a>
                 </div>
