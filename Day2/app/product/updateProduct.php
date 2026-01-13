@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-  <h2>Update Product <?php echo $product['name']; ?></h2>
+  <h2>Update Product '<?php echo $product['name']; ?>'</h2>
 
   <?php if (!empty($error)): ?>
     <div class="msg error"><?= $error; ?></div>
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </select>
 
     <button type="submit">Update Product</button>
-    <a href="../product/index.php" class="btn-cancel">Cancel</a>
+    <a href="../home/home.php" class="btn-cancel">Cancel</a>
   </form>
 </body>
 

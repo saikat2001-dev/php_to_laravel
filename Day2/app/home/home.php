@@ -49,7 +49,7 @@ $products = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
   <h2>Existing Products</h2>
 
-  <form method="post" action="../product/bulkAction.php" id="bulkForm">
+  <form method="post" action="../product/bulkDeleteProduct.php" id="bulkForm">
     <div style="margin-bottom: 10px;">
       <button type="submit" name="action" value="bulk_delete" onclick="return confirm('Delete selected products?')"
         class="bulk-del-btn">
