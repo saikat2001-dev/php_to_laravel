@@ -32,9 +32,9 @@ class Database
   {
     if (self::$instance === null) {
       $object = new self();
-      self::$instance = $object->connection;
+      self::$instance = $object;
     }
-    if (self::$instance === null) {
+    if (self::$instance->connection === null) {
       throw new \Exception("Database connection could not be established.");
     }
     return self::$instance;
@@ -49,5 +49,34 @@ class Database
   public function __wakeup()
   {
     throw new \Exception("Cannot unserialize a singleton.");
+  }
+
+  //transaction for db using PDO
+  public function beginTransaction()
+  {
+    return $this->connection->beginTransaction();
+  }
+
+  public function commit()
+  {
+    return $this->connection->commit();
+  }
+
+  public function rollBack()
+  {
+    return $this->connection->rollBack();
+  }
+
+  public function lastInsertId()
+  {
+    return $this->connection->lastInsertId();
+  }
+  public function prepare($sql)
+  {
+    return $this->connection->prepare($sql);
+  }
+  public function query($sql)
+  {
+    return $this->connection->query($sql);
   }
 }

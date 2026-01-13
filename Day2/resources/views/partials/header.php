@@ -1,10 +1,25 @@
+<?php
+// Get the current path
+$current_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+// Create a mapping of routes to clean titles
+$titles = [
+  '/' => 'Home',
+  '/login' => 'Login',
+  '/register' => 'Create Account',
+  '/dashboard' => 'Admin Dashboard'
+];
+
+$page_label = $titles[$current_path] ?? ucfirst(ltrim($current_path, '/'));
+$display_title = COMPANY_NAME ." | " . ($page_label ?: 'Modern Essentials');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?= $pageTitle ?? 'E Commerce' ?></title>
+  <title><?= $display_title ?></title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -17,7 +32,7 @@
   <header>
     <div class="container">
       <nav>
-        <a href="/" class="logo"><?= $companyName ?>.</a>
+        <a href="/" class="logo"><?= COMPANY_NAME ?>.</a>
         <div class="nav-links">
           <a href="/shop.php">Shop</a>
           <a href="/categories.php">Categories</a>
