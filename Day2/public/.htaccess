@@ -1,8 +1,0 @@
-RewriteEngine On
-
-# If the request isn't a real file or folder...
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-
-# ...send it to index.php as the 'route' variable
-RewriteRule ^(.*)$ index.php?route=/$1 [L,QSA]

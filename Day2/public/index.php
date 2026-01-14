@@ -16,13 +16,24 @@ $route = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 switch ($route) {
   case '/':
-    (new ProductController())->getAllProducts();
+    (new ProductController())->index();
     break;
   case '/login':
     (new UserController())->login();
     break;
   case '/register':
     (new UserController())->register();
+    break;
+  case '/cart':
+    break;
+  case '/shop':
+    (new ProductController())->shop();
+    break;
+  case '/product/create':
+    (new ProductController())->store();
+    break;
+  case '/logout':
+    (new UserController())->logout();
     break;
   default:
     http_response_code(404);

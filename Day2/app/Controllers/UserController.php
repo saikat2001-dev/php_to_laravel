@@ -40,6 +40,7 @@ class UserController
         $error = "All fields are required";
       } else {
         $userData = User::loginUser($email, $password);
+        echo $userData;
         if ($userData) {
           $_SESSION['userId'] = $userData['id'];
           $_SESSION['roleId'] = $userData['roleId'];
@@ -52,5 +53,12 @@ class UserController
       }
     }
     include __DIR__ . '/../../resources/views/auth/login.php';
+  }
+  public function logout() {
+    $_SESSION = [];
+
+    session_destroy();
+    header('Location: /login?message=logged_out');
+    exit;
   }
 }

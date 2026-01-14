@@ -15,10 +15,19 @@
         </div>
       <?php endif; ?>
 
-      <?php if (isset($_GET['registered'])): ?>
+      <?php
+      $success_message = null;
+      if (isset($_GET['registered'])) {
+        $success_message = "Registration successful! Please login.";
+      } elseif (isset($_GET['message']) && $_GET['message'] === 'logged_out') {
+        $success_message = "You have been successfully logged out.";
+      }
+      ?>
+
+      <?php if ($success_message): ?>
         <div
           style="background: #dcfce7; color: #15803d; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; font-size: 0.9rem; border: 1px solid #bbf7d0; text-align: center;">
-          Registration successful! Please login.
+          <?= htmlspecialchars($success_message) ?>
         </div>
       <?php endif; ?>
 

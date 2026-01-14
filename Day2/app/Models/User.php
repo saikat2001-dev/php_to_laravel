@@ -36,7 +36,10 @@ class User
   {
     try {
       $db = Database::getInstance();
-      $stmt = $db->prepare("SELECT * FROM users WHERE email = ?");
+      $stmt = $db->prepare("SELECT u.*, ur.role_id 
+                FROM users u 
+                LEFT JOIN user_roles ur ON u.id = ur.user_id 
+                WHERE u.email = ?");
       $stmt->execute([$email]);
 
       $user = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -53,7 +56,7 @@ class User
           'id' => $user['id'],
           'name' => $user['name'],
           'email' => $user['email'],
-          'roleId' => $user['roleId'],
+          'roleId' => $user['role_id'],
           'permissions' => $permissions
         ];
       }

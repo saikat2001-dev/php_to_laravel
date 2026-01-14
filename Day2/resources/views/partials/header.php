@@ -11,7 +11,7 @@ $titles = [
 ];
 
 $page_label = $titles[$current_path] ?? ucfirst(ltrim($current_path, '/'));
-$display_title = COMPANY_NAME . " | " . ($page_label ?: 'Modern Essentials');
+$display_title = COMPANY_NAME . " | " . ($page_label ?: 'E Commerce');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +40,7 @@ $display_title = COMPANY_NAME . " | " . ($page_label ?: 'Modern Essentials');
           <?php if (isset($_SESSION['userId'])): ?>
             <a href="/cart">Cart (0)</a>
 
-            <?php if ($_SESSION['roleId'] == 1): // Assuming 1 is Admin ?>
+            <?php if ($_SESSION['roleId'] == "1"): // Assuming 1 is Admin ?>
               <a href="/dashboard" style="font-weight: bold; color: #3498db;">Dashboard</a>
             <?php endif; ?>
 

@@ -6,6 +6,11 @@
   --white: #ffffff;
   --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 }
+button {
+  all: unset;
+  font-family: "Google sans", sans-serif;
+  text-align: center;
+}
 
 body {
   font-family: "Google sans", sans-serif;
@@ -16,14 +21,13 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 20px;
 }
 
 /* Navbar */
 header {
   background: var(--white);
   box-shadow: var(--shadow);
-  padding: 1rem 0;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -96,4 +100,58 @@ nav {
   color: var(--primary);
   font-weight: bold;
   font-size: 1.25rem;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Example of the "proper styling" I will provide */
+.btn-primary {
+    display: inline-block;
+    padding: 0.85rem 1.5rem;
+    background-color: #2563eb;
+    color: #ffffff;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s active;
+    border: none; /* Explicitly defining since all:unset removed it */
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-home-card {
+    /* Reset recovery */
+    display: block;
+    /* width: 100%; */
+    cursor: pointer;
+    text-decoration: none;
+    
+    /* Design */
+    padding: 0.6rem;
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    transition: all 0.2s ease;
+    
+    /* Your global preferences */
+    text-align: center;
+    font-family: inherit;
+}
+
+.btn-home-card:hover {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
 }
