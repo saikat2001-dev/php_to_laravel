@@ -1,17 +1,17 @@
 <?php
-// Get the current path
+// 1. Dynamic Title Logic
 $current_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-// Create a mapping of routes to clean titles
 $titles = [
   '/' => 'Home',
   '/login' => 'Login',
   '/register' => 'Create Account',
-  '/dashboard' => 'Admin Dashboard'
+  '/dashboard' => 'Admin Dashboard',
+  '/shop' => 'Shop All Products',
+  '/cart' => 'Your Shopping Cart'
 ];
 
 $page_label = $titles[$current_path] ?? ucfirst(ltrim($current_path, '/'));
-$display_title = COMPANY_NAME ." | " . ($page_label ?: 'Modern Essentials');
+$display_title = COMPANY_NAME . " | " . ($page_label ?: 'Modern Essentials');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,9 +34,21 @@ $display_title = COMPANY_NAME ." | " . ($page_label ?: 'Modern Essentials');
       <nav>
         <a href="/" class="logo"><?= COMPANY_NAME ?>.</a>
         <div class="nav-links">
-          <a href="/shop.php">Shop</a>
-          <a href="/categories.php">Categories</a>
-          <a href="/cart.php">Cart (0)</a>
+          <a href="/shop">Shop</a>
+          <a href="/categories">Categories</a>
+
+          <?php if (isset($_SESSION['userId'])): ?>
+            <a href="/cart">Cart (0)</a>
+
+            <?php if ($_SESSION['roleId'] == 1): // Assuming 1 is Admin ?>
+              <a href="/dashboard" style="font-weight: bold; color: #3498db;">Dashboard</a>
+            <?php endif; ?>
+
+            <a href="/logout">Logout</a>
+          <?php else: ?>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+          <?php endif; ?>
         </div>
       </nav>
     </div>

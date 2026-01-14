@@ -21,7 +21,7 @@ class User
       $stmt->execute([$name, $email, $password]);
       $userId = $db->lastInsertId();
 
-      $stmtRole = $db->prepare("INSERT INTO user_roles (userid, role_id) VALUES (?, ?)");
+      $stmtRole = $db->prepare("INSERT INTO user_roles (user_id, role_id) VALUES (?, ?)");
       $stmtRole->execute([$userId, $roleId]);
 
       $db->commit();
@@ -41,7 +41,7 @@ class User
 
       $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-      if ($user && password_verify($password, $user['password'])) {
+      if ($user && $password === $user['password']) {
         $sql = "SELECT DISTINCT p.slug FROM permissions p
         JOIN role_perm rp ON p.id = rp.perm_id
         JOIN user_roles ur ON rp.role_id = ur.role_id
@@ -49,11 +49,11 @@ class User
         $permStmt = $db->prepare($sql);
         $permStmt->execute([$user['id']]);
         $permissions = $permStmt->fetchAll(\PDO::FETCH_COLUMN);
-
         return [
           'id' => $user['id'],
           'name' => $user['name'],
           'email' => $user['email'],
+          'roleId' => $user['roleId'],
           'permissions' => $permissions
         ];
       }

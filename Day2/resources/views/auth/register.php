@@ -31,7 +31,7 @@
 
         <div class="form-group">
           <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">I am a...</label>
-          <select name="role_id" required
+          <select name="roleId" required
             style="width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px; background: white; outline: none;">
             <option value="2">Customer</option>
             <option value="1">Administrator</option>

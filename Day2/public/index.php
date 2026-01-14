@@ -19,13 +19,14 @@ switch ($route) {
     (new ProductController())->getAllProducts();
     break;
   case '/login':
-    // (new UserController())->login();
+    (new UserController())->login();
     break;
   case '/register':
     (new UserController())->register();
     break;
   default:
     http_response_code(404);
-    echo "404 not found";
+    $display_title = COMPANY_NAME . " | Page Not Found";
+    include __DIR__ . '/../resources/views/error/404.php';
     break;
 }
