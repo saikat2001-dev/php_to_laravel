@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Cart;
 use App\Models\User;
 
 class UserController
@@ -40,11 +41,14 @@ class UserController
         $error = "All fields are required";
       } else {
         $userData = User::loginUser($email, $password);
-        echo $userData;
         if ($userData) {
           $_SESSION['userId'] = $userData['id'];
           $_SESSION['roleId'] = $userData['roleId'];
           $_SESSION['permissions'] = $userData['permissions'];
+          if(!empty($_SESSION['cart'])) {
+            Cart::syncSessionCartToDb($userData['id'], $_SESSION['cart']);
+          }
+          $_SESSION['cart'] = Cart::getDbCartIds($userData['id']);
           header('Location: /');
           exit;
         } else {

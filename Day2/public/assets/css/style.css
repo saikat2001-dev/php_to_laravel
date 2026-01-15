@@ -155,3 +155,86 @@ nav {
     color: white;
     border-color: var(--primary);
 }
+/* Product Card Container */
+.product-card {
+  position: relative;
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background: #fff;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* The Gradient Quarter Circle Overlay */
+.admin-actions-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 70px; /* Size of the quarter circle */
+  height: 70px;
+  /* Gradient from corner */
+  background: radial-gradient(circle at top right, var(--text, #eaeaea) 0%, transparent 70%);
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 12px;
+  gap: 12px;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none; /* Prevents blocking clicks when invisible */
+}
+
+.product-card:hover .admin-actions-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Admin Buttons Styling */
+.admin-btn {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.admin-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: #ffffff; /* White icons for the dark gradient */
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.admin-btn:hover {
+  transform: scale(1.2);
+  opacity: 0.8;
+}
+
+/* Image Wrapper */
+.product-image-wrapper {
+  height: 220px;
+  background: #fdfdfd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Product Info */
+.product-info {
+  padding: 1.5rem;
+  border-top: 1px solid #fafafa;
+}
+
+.product-price-tag {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--primary);
+}

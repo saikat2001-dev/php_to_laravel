@@ -1,6 +1,7 @@
 <!-- Geschäft -->
 <?php
 session_start();
+use App\Controllers\CartController;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -25,12 +26,31 @@ switch ($route) {
     (new UserController())->register();
     break;
   case '/cart':
+    (new CartController())->index();
     break;
   case '/shop':
     (new ProductController())->shop();
     break;
   case '/product/create':
-    (new ProductController())->store();
+    // If POST, store it. If GET, show the blank form.
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      (new ProductController())->store(); // controller to save to DB (POST request)
+    } else {
+      (new ProductController())->create(); // controller to open webview (GET request)
+    }
+    break;
+  case '/product/delete':
+    (new ProductController())->delete();
+    break;
+  case '/product/update':
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      (new ProductController())->update(); //controller to save to DB (POST request)
+    } else {
+      (new ProductController())->edit(); // controller to open webview (GET request)
+    }
+    break;
+  case '/cart/add':
+    (new CartController())->add();
     break;
   case '/logout':
     (new UserController())->logout();

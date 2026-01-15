@@ -37,8 +37,10 @@ $display_title = COMPANY_NAME . " | " . ($page_label ?: 'E Commerce');
           <a href="/shop">Shop</a>
           <a href="/categories">Categories</a>
 
+          <a href="/cart">Cart (
+          <?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?>  
+          )</a>
           <?php if (isset($_SESSION['userId'])): ?>
-            <a href="/cart">Cart (0)</a>
 
             <?php if ($_SESSION['roleId'] == "1"): // Assuming 1 is Admin ?>
               <a href="/dashboard" style="font-weight: bold; color: #3498db;">Dashboard</a>
