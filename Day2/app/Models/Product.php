@@ -24,9 +24,10 @@ class Product
       error_log("Get All Product Error: " . $pdoe->getMessage());
     }
   }
-  public static function getProductsByIds($ids) {
+  public static function getProductsByIds($ids)
+  {
     try {
-      if(empty($ids)) return [];
+      if (empty($ids)) return [];
 
       $db = Database::getInstance();
       $placeholder = implode(',', array_fill(0, count($ids), '?'));
@@ -34,16 +35,16 @@ class Product
       $stmt->execute($ids);
       return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     } catch (\PDOException $pdoe) {
-      error_log("Get Products By Ids Error: ".$pdoe->getMessage());
+      error_log("Get Products By Ids Error: " . $pdoe->getMessage());
       return [];
     }
   }
-  public static function addProduct($productName, $productPrice, $categoryId, $description, $imageName)
+  public static function addProduct($productName, $productPrice, $categoryId, $description, $imageName, $stock = 10)
   {
     try {
       $db = Database::getInstance();
-      $stmt = $db->prepare("INSERT INTO products (name, price, category_id, description, image) VALUES (?, ?, ?, ?, ?)");
-      $res = $stmt->execute([$productName, $productPrice, $categoryId, $description, $imageName]);
+      $stmt = $db->prepare("INSERT INTO products (name, price, category_id, description, image, stock) VALUES (?, ?, ?, ?, ?, ?)");
+      $res = $stmt->execute([$productName, $productPrice, $categoryId, $description, $imageName, $stock]);
       return $res ? $db->lastInsertId() : false;
     } catch (\PDOException $pdoe) {
       error_log("Add Product Error: " . $pdoe->getMessage());
@@ -73,16 +74,26 @@ class Product
       return false;
     }
   }
-  public static function updateProduct($id, $name, $price, $catId, $description, $imageName){
+  public static function updateProduct($id, $name, $price, $catId, $description, $imageName, $stock)
+  {
     try {
       $db = Database::getInstance();
       $sql = "UPDATE products
-              SET name = ?, price = ?, category_id = ?, description = ?, image = ?
+              SET name = ?, price = ?, category_id = ?, description = ?, image = ?, stock = ?
               WHERE id = ?";
       $stmt = $db->prepare($sql);
-      return $stmt->execute([$name, $price, $catId, $description, $imageName, $id]);
+      return $stmt->execute([$name, $price, $catId, $description, $imageName,  $stock, $id]);
     } catch (\PDOException $pdoe) {
-      error_log("Update Product Error: ".$pdoe->getMessage());
+      error_log("Update Product Error: " . $pdoe->getMessage());
+    }
+  }
+  public static function reduceStock($productId, $quantity) {
+    try {
+      $db = Database::getInstance();
+      $stmt = $db->prepare("UPDATE products SET stock = stock - ? WHERE id = ? AND stock >= ?");
+      return $stmt->execute([$quantity, $productId, $quantity]);
+    } catch (\PDOException $pdoe) {
+      error_log("Reduce Quantity Error: ".$pdoe->getMessage());
     }
   }
 }

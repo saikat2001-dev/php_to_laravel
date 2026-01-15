@@ -1,6 +1,7 @@
 <!-- Geschäft -->
 <?php
 session_start();
+use App\Controllers\StripeController;
 use App\Controllers\CartController;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -51,6 +52,18 @@ switch ($route) {
     break;
   case '/cart/add':
     (new CartController())->add();
+    break;
+  case '/cart/update-quantity':
+    (new CartController())->update();
+    break;
+  case '/cart/remove':
+    (new CartController())->remove();
+    break;
+  case '/checkout/create-session':
+    (new StripeController())->createSession();
+    break;
+  case '/checkout/success':
+    (new StripeController())->success();
     break;
   case '/logout':
     (new UserController())->logout();

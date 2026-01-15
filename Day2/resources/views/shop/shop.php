@@ -1,4 +1,8 @@
-<?php include __DIR__ . '/../partials/header.php' ?>
+<?php
+
+use App\Models\Product;
+
+ include __DIR__ . '/../partials/header.php' ?>
 
 <main class="container" style="padding: 2rem 0;">
   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
@@ -47,16 +51,30 @@
 
           <div style="padding: 1.5rem;">
             <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><?= htmlspecialchars($product['name']) ?></h3>
-            <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">
+            <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 0.5rem;">
               <?= htmlspecialchars(substr($product['description'], 0, 80)) ?>...
             </p>
+
+            <div style="margin-bottom: 1rem;">
+              <?php if ($product['stock'] <= 0): ?>
+                <span style="color: #ef4444; font-size: 0.8rem; font-weight: 600;">Out of Stock</span>
+              <?php elseif ($product['stock'] < 5): ?>
+                <span style="color: #f59e0b; font-size: 0.8rem; font-weight: 600;">Only <?= $product['stock'] ?> left!</span>
+              <?php else: ?>
+                <span style="color: #94a3b8; font-size: 0.8rem;">In Stock: <?= $product['stock'] ?></span>
+              <?php endif; ?>
+            </div>
 
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <span style="font-size: 1.25rem; font-weight: 700; color: var(--primary);">
                 ₹<?= number_format($product['price'], 2) ?>
               </span>
 
-              <?php if (isset($_SESSION['cart']) && in_array($product['id'], $_SESSION['cart'])): ?>
+              <?php if ($product['stock'] <= 0): ?>
+                <button disabled style="padding: 0.5rem 1rem; font-size: 0.9rem; border-radius: 6px; background: #e2e8f0; color: #94a3b8; border: none; cursor: not-allowed;">
+                  Sold Out
+                </button>
+              <?php elseif (isset($_SESSION['cart'][$product['id']])): ?>
                 <div style="color: #22c55e; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 4px;">
                   <span>✓</span> Added
                 </div>

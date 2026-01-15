@@ -6,7 +6,7 @@ use App\Core\Database;
 
 class Cart
 {
-  public static function addItem($userId, $productId)
+  public static function addItem($userId, $productId, $quantity = 1)
   {
     try {
       $db = Database::getInstance();
@@ -14,8 +14,8 @@ class Cart
       $stmt->execute([$userId, $productId]);
 
       if (!$stmt->fetch()) {
-        $insert = $db->prepare("INSERT INTO cart_items (user_id, product_id) VALUES (?, ?)");
-        $insert->execute([$userId, $productId]);
+        $insert = $db->prepare("INSERT INTO cart_items (user_id, product_id, quantity) VALUES (?, ?, ?)");
+        $insert->execute([$userId, $productId, $quantity]);
       }
       return true;
     } catch (\PDOException $pdoe) {
@@ -36,19 +36,31 @@ class Cart
   }
   public static function syncSessionCartToDb($userId, $productIds)
   {
-    foreach ($productIds as $id) {
-      self::addItem($userId, $id);
+    foreach ($productIds as $id => $quantity) {
+      self::addItem($userId, $id, $quantity);
     }
   }
   public static function getDbCartIds($userId)
   {
+    $db = Database::getInstance();
+    $stmt = $db->prepare("SELECT product_id, quantity FROM cart_items WHERE user_id = ?");
+    $stmt->execute([$userId]);
+
+    return $stmt->fetchAll(\PDO::FETCH_KEY_PAIR);
+  }
+  public static function updateQuantity($userId, $productId, $quantity)
+  {
     try {
       $db = Database::getInstance();
-      $stmt = $db->prepare("SELECT product_id FROM cart_items WHERE user_id = ?");
-      $stmt->execute([$userId]);
-      return $stmt->fetchAll(\PDO::FETCH_COLUMN);
+      $stmt = $db->prepare("UPDATE cart_items SET quantity = ? WHERE user_id = ? AND product_id = ?");
+      return $stmt->execute([$quantity, $userId, $productId]);
     } catch (\PDOException $pdoe) {
-      error_log("Get DB Cart Id Error: " . $pdoe->getMessage());
+      error_log("Update Quantity Error: ", $pdoe->getMessage());
     }
+  }
+  public static function clearDBCart($userId) {
+    $db = Database::getInstance();
+    $stmt = $db->prepare("DELETE FROM cart_items where user_id = ?");
+    return $stmt->execute([$userId]);
   }
 }

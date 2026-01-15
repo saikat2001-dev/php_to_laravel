@@ -11,6 +11,12 @@ button {
   font-family: "Google sans", sans-serif;
   text-align: center;
 }
+html, input {
+  font-family: "Google sans", sans-serif;
+}
+img{
+  mix-blend-mode: multiply;
+}
 
 body {
   font-family: "Google sans", sans-serif;

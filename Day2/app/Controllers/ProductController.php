@@ -106,6 +106,7 @@ class ProductController
       $price = $_POST['price'];
       $description = $_POST['description'];
       $catId = $_POST['category_id'];
+      $stock = $_POST['stock'];
 
       // Get current data to manage the image replacement
       $oldProduct = Product::getProductById($id);
@@ -120,7 +121,7 @@ class ProductController
         move_uploaded_file($_FILES['image']['tmp_name'], "assets/photos/" . $imageName);
       }
 
-      $success = Product::updateProduct($id, $name, $price, $catId, $description, $imageName);
+      $success = Product::updateProduct($id, $name, $price, $catId, $description, $imageName, $stock);
 
       $status = $success ? 'product_update_success' : 'product_update_error';
       header("Location: /shop?status=$status");
