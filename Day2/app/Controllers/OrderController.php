@@ -8,6 +8,10 @@ class OrderController
 {
     public function index()
     {
+        if(!isset($_SESSION['userId'])) {
+            header('Location: /login');
+            exit;
+        }
         $userId = $_SESSION['userId'];
         $orders = Order::getOrdersByUser($userId);
 

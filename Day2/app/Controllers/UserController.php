@@ -49,7 +49,8 @@ class UserController
             Cart::syncSessionCartToDb($userData['id'], $_SESSION['cart']);
           }
           $_SESSION['cart'] = Cart::getDbCartIds($userData['id']);
-          header('Location: /');
+          $redirect = $_GET['redirect_to'];
+          header("Location: /$redirect");
           exit;
         } else {
           $error = "Login failed. Password or email maybe invalid";

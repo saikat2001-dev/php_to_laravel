@@ -20,6 +20,11 @@ class StripeController {
       header('Location: /cart');
       exit;
     }
+    //check if loggedin
+    if(!isset($_SESSION['userId'])){
+      header('Location: /login?redirect_to=checkout/create-session');
+      exit;
+    }
 
     $products = Product::getProductsByIds(array_keys($cartData));
     $lineItems = [];

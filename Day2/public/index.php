@@ -67,7 +67,7 @@ switch ($route) {
   case '/checkout/success':
     (new StripeController())->success();
     break;
-  case '/my-orders':
+  case '/my_orders':
     (new OrderController())->index();
     break;
   case '/admin/dashboard':

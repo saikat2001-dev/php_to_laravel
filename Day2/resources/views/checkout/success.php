@@ -31,7 +31,7 @@
         <a href="/shop" class="btn-primary" style="padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600;">
             Continue Shopping
         </a>
-        <a href="/my-orders" style="padding: 1rem 2rem; text-decoration: none; color: #475569; font-weight: 600; border: 1px solid #e2e8f0; border-radius: 8px; background: #fff;">
+        <a href="/my_orders" style="padding: 1rem 2rem; text-decoration: none; color: #475569; font-weight: 600; border: 1px solid #e2e8f0; border-radius: 8px; background: #fff;">
             View My Orders
         </a>
     </div>

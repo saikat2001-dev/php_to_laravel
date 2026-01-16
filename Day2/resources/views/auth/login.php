@@ -31,7 +31,7 @@
         </div>
       <?php endif; ?>
 
-      <form action="/login" method="POST" style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <form action="/login?redirect_to=<?php echo htmlspecialchars($_GET['redirect_to'] ?? '/'); ?>" method="POST" style="display: flex; flex-direction: column; gap: 1.25rem;">
 
         <div class="form-group">
           <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Email Address</label>

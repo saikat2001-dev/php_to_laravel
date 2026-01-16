@@ -60,7 +60,36 @@ class Order
     $res = $db->query("SELECT sum(quantity) FROM order_items");
     return $res->fetchColumn();
   }
-  public static function getFilteredOrders($filter){
+  public static function getTopBuyers($limit){
+    $db = Database::getInstance();
+    $stmt = $db->prepare("
+      SELECT u.name, count(o.id) as order_count, sum(o.total_amount) as total_spent
+      FROM orders o
+      JOIN users u ON o.user_id = u.id
+      WHERE o.status = 'completed'
+      GROUP BY o.user_id
+      ORDER BY total_spent DESC
+      LIMIT ?
+    ");
+    $stmt->execute([$limit]);
+    return $stmt->fetchAll();
+  }
+  public static function getFilteredOrders($status = 'all'){
+    $db = Database::getInstance();
+    $sql = "SELECT o.*, u.name as customer_name
+      FROM orders o
+      LEFT JOIN users u ON o.user_id = u.id";
+    
+    $params = [];
 
+    if($status !== 'all'){
+      $sql .= " WHERE o.status = ?";
+      $params[] = $status;
+    }
+
+    $sql .= " ORDER BY o.created_at DESC";
+    $stmt = $db->prepare($sql);
+    $stmt->execute($params);
+    return $stmt->fetchAll();
   }
 }

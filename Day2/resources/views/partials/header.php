@@ -35,8 +35,9 @@ $display_title = COMPANY_NAME . " | " . ($page_label ?: 'E Commerce');
         <a href="/" class="logo"><?= COMPANY_NAME ?>.</a>
         <div class="nav-links">
           <a href="/shop">Shop</a>
-          <a href="/categories">Categories</a>
-
+          <?php if (isset($_SESSION['userId'])) : ?>
+          <a href="/my_orders">My Orders</a>
+            <?php endif; ?>
           <a href="/cart">Cart (
           <?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?>  
           )</a>
