@@ -1,6 +1,7 @@
 <!-- Geschäft -->
 <?php
 session_start();
+use App\Controllers\OrderController;
 use App\Controllers\StripeController;
 use App\Controllers\CartController;
 
@@ -64,6 +65,9 @@ switch ($route) {
     break;
   case '/checkout/success':
     (new StripeController())->success();
+    break;
+  case '/my-orders':
+    (new OrderController())->index();
     break;
   case '/logout':
     (new UserController())->logout();
