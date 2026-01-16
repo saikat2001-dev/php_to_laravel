@@ -66,4 +66,9 @@ class User
       return false;
     }
   }
+  public static function getUsersCount(){
+    $db = Database::getInstance();
+    $res = $db->query("SELECT count(*) from users");
+    return $res->fetchColumn();
+  }
 }

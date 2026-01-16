@@ -11,7 +11,7 @@ button {
   font-family: "Google sans", sans-serif;
   text-align: center;
 }
-html, input {
+html, input, select, option {
   font-family: "Google sans", sans-serif;
 }
 img{

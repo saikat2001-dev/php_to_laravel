@@ -41,7 +41,7 @@ class Order
     $results = $stmt->fetchAll();
     $orders = [];
     foreach ($results as $row) {
-      $orders[$row['id']]['into'] = [
+      $orders[$row['id']]['info'] = [
         'total' => $row['total_amount'],
         'status' => $row['status'],
         'date' => $row['created_at'],
@@ -49,5 +49,18 @@ class Order
       $orders[$row['id']]['items'][] = $row;
     }
     return $orders;
+  }
+  public static function getTotalRevenue(){
+    $db = Database::getInstance();
+    $res = $db->query("SELECT sum(total_amount)  FROM orders");
+    return $res->fetchColumn();
+  }
+  public static function getTotalProductsSold() {
+    $db = Database::getInstance();
+    $res = $db->query("SELECT sum(quantity) FROM order_items");
+    return $res->fetchColumn();
+  }
+  public static function getFilteredOrders($filter){
+
   }
 }

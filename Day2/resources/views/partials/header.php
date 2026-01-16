@@ -5,7 +5,7 @@ $titles = [
   '/' => 'Home',
   '/login' => 'Login',
   '/register' => 'Create Account',
-  '/dashboard' => 'Admin Dashboard',
+  '/admin/dashboard' => 'Admin Dashboard',
   '/shop' => 'Shop All Products',
   '/cart' => 'Your Shopping Cart'
 ];
@@ -43,7 +43,7 @@ $display_title = COMPANY_NAME . " | " . ($page_label ?: 'E Commerce');
           <?php if (isset($_SESSION['userId'])): ?>
 
             <?php if ($_SESSION['roleId'] == "1"): // Assuming 1 is Admin ?>
-              <a href="/dashboard" style="font-weight: bold; color: #3498db;">Dashboard</a>
+              <a href="/admin/dashboard" style="font-weight: bold; color: #3498db;">Dashboard</a>
             <?php endif; ?>
 
             <a href="/logout">Logout</a>

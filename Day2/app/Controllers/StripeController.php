@@ -65,7 +65,7 @@ class StripeController {
         $orderItems = [];
         $total = 0;
         foreach($products as $product) {
-          $qty = $cartData[$product['id']];
+          $qty = (int)$cartData[$product['id']];
           $orderItems[] = [
             'id' => $product['id'],
             'qty' => $qty,

@@ -1,6 +1,6 @@
 <?php include __DIR__ . '/../partials/header.php'; ?>
 
-<main class="container" style="max-width: 900px; margin: 4rem auto; font-family: 'Inter', sans-serif;">
+<main class="container" style="max-width: 900px; margin: 4rem auto;">
     <h2 style="margin-bottom: 2rem; color: #1a1a1a;">Your Purchase History</h2>
 
     <?php if (empty($orders)): ?>
