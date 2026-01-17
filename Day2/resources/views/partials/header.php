@@ -33,24 +33,29 @@ $display_title = COMPANY_NAME . " | " . ($page_label ?: 'E Commerce');
     <div class="container">
       <nav>
         <a href="/" class="logo"><?= COMPANY_NAME ?>.</a>
+
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+
         <div class="nav-links">
           <a href="/shop">Shop</a>
           <?php if (isset($_SESSION['userId'])) : ?>
-          <a href="/my_orders">My Orders</a>
-            <?php endif; ?>
-          <a href="/cart">Cart (
-          <?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?>  
-          )</a>
+            <a href="/my_orders">My Orders</a>
+          <?php endif; ?>
+          <a href="/cart">Cart (<?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?>)</a>
+
           <?php if (isset($_SESSION['userId'])): ?>
-
-            <?php if ($_SESSION['roleId'] == "1"): // Assuming 1 is Admin ?>
-              <a href="/admin/dashboard" style="font-weight: bold; color: #3498db;">Dashboard</a>
+            <?php if ($_SESSION['roleId'] == "1"): ?>
+              <a href="/admin/dashboard" class="admin-link">Dashboard</a>
             <?php endif; ?>
-
             <a href="/logout">Logout</a>
           <?php else: ?>
             <a href="/login">Login</a>
-            <a href="/register">Register</a>
+            <a href="/register" class="register-btn">Register</a>
           <?php endif; ?>
         </div>
       </nav>

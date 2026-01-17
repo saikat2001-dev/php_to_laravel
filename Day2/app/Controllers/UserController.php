@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Cart;
 use App\Models\User;
+use Toast;
 
 class UserController
 {
@@ -64,6 +65,7 @@ class UserController
 
     session_destroy();
     header('Location: /login?message=logged_out');
+    // Toast::add("Logged out successfully");
     exit;
   }
 }

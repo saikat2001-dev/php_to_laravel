@@ -11,10 +11,13 @@ button {
   font-family: "Google sans", sans-serif;
   text-align: center;
 }
-html, input, select, option {
+html,
+input,
+select,
+option {
   font-family: "Google sans", sans-serif;
 }
-img{
+img {
   mix-blend-mode: multiply;
 }
 
@@ -114,52 +117,54 @@ nav {
 
 /* Example of the "proper styling" I will provide */
 .btn-primary {
-    display: inline-block;
-    padding: 0.85rem 1.5rem;
-    background-color: #2563eb;
-    color: #ffffff;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.1s active;
-    border: none; /* Explicitly defining since all:unset removed it */
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  background-color: #2563eb;
+  color: #ffffff;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.1s active;
+  border: none; /* Explicitly defining since all:unset removed it */
 }
 
 .btn-primary:hover {
-    background-color: #1d4ed8;
+  background-color: #1d4ed8;
 }
 
 .btn-primary:active {
-    transform: scale(0.98);
+  transform: scale(0.98);
 }
 
 .btn-home-card {
-    /* Reset recovery */
-    display: block;
-    /* width: 100%; */
-    cursor: pointer;
-    text-decoration: none;
-    
-    /* Design */
-    padding: 0.6rem;
-    background-color: #f8f9fa;
-    color: #333;
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    margin-top: 0.5rem;
-    transition: all 0.2s ease;
-    
-    /* Your global preferences */
-    text-align: center;
-    font-family: inherit;
+  /* Reset recovery */
+  display: block;
+  /* width: 100%; */
+  cursor: pointer;
+  text-decoration: none;
+
+  /* Design */
+  padding: 0.6rem;
+  background-color: #f8f9fa;
+  color: #333;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  transition: all 0.2s ease;
+
+  /* Your global preferences */
+  text-align: center;
+  font-family: inherit;
 }
 
 .btn-home-card:hover {
-    background-color: var(--primary);
-    color: white;
-    border-color: var(--primary);
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
 }
 /* Product Card Container */
 .product-card {
@@ -184,7 +189,11 @@ nav {
   width: 70px; /* Size of the quarter circle */
   height: 70px;
   /* Gradient from corner */
-  background: radial-gradient(circle at top right, var(--text, #eaeaea) 0%, transparent 70%);
+  background: radial-gradient(
+    circle at top right,
+    var(--text, #eaeaea) 0%,
+    transparent 70%
+  );
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
@@ -192,7 +201,9 @@ nav {
   gap: 12px;
   z-index: 10;
   opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
   pointer-events: none; /* Prevents blocking clicks when invisible */
 }
 
@@ -208,14 +219,16 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .admin-btn svg {
   width: 20px;
   height: 20px;
   fill: #ffffff; /* White icons for the dark gradient */
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .admin-btn:hover {
@@ -243,4 +256,106 @@ nav {
   font-size: 1.3rem;
   font-weight: 800;
   color: var(--primary);
+}
+#toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.toast {
+  background: #1e293b;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transform: translateX(120%);
+  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toast.show {
+  transform: translateX(0);
+}
+.toast.success {
+  border-left: 4px solid #10b981;
+}
+.toast.error {
+  border-left: 4px solid #ef4444;
+}
+/* --- Base Mobile First / Desktop Styles --- */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Hide toggle elements on desktop */
+.menu-toggle, .hamburger {
+  display: none;
+}
+
+/* --- Mobile Styles (Breakpoints) --- */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 100;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #333;
+    border-radius: 3px;
+    transition: 0.3s;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1.5rem;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    display: none; /* Hidden by default */
+    z-index: 99;
+  }
+
+  /* Show menu when checkbox is checked */
+  .menu-toggle:checked ~ .nav-links {
+    display: flex;
+  }
+
+  /* Animate Hamburger to X when open */
+  .menu-toggle:checked ~ .hamburger span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .menu-toggle:checked ~ .hamburger span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle:checked ~ .hamburger span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+  
+  .menu-toggle {
+    display: none;
+  }
 }

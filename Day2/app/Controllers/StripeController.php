@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use App\Core\Email;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
@@ -83,6 +84,8 @@ class StripeController {
         $orderId = Order::createOrder($userId, $total, $sessionId, $orderItems);
         unset($_SESSION['cart']);
         if($orderId) {
+          $userEmail = $session->customer_details->email;
+          Email::sendOrderConfirmation($userEmail, $orderId, $total);
           Cart::clearDBCart($userId);
         }
 
